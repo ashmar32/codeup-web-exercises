@@ -15,6 +15,7 @@ function sayHello(name){
 
 }
 
+console.log(sayHello("ashley"))
 /**
  * TODO:
  * Call the function 'sayHello' and pass your name as a string literal argument.
@@ -34,7 +35,7 @@ console.log(helloMessage);
  * console.
  */
 
-let myName = ("Ashley");
+let myName = "Ashley";
 sayHello(myName)
 console.log(sayHello(myName));
 
@@ -80,7 +81,7 @@ console.log(isTwo(random));
  */
 
 function calculateTip(x, y){
-    return (x * y);
+    return (x * y).toFixed(1);
 
 }
 console.log(calculateTip(.20, 20))
@@ -91,9 +92,9 @@ console.log(calculateTip(.20, 20))
  * then display the dollar amount they should tip
  */
 
-let x = prompt("Please enter your bill total: ")
-let y = prompt("Please enter the tip percentage")
-alert("Your tip amount is $" + (x * y));
+let total = prompt("Please enter your bill total: ")
+let percentage = prompt("Please enter the tip percentage")
+alert("Your tip amount is $" + calculateTip(total, percentage));
 
 /**
  * TODO:
@@ -109,3 +110,10 @@ alert("Your tip amount is $" + (x * y));
  *
  * > applyDiscount(45.99, 0.12) // 40.4712
  */
+
+function applyDiscount(price, discount){
+    let discountPrice = (price - (price * discount))
+    return discountPrice;
+
+}
+console.log(applyDiscount(45.99, .12))
