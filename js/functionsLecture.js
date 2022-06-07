@@ -1,7 +1,5 @@
 (function()
 {
-
-
 function helloWorld() {
     //this is the body of the function - we write our instructions
     alert("Hello World!");
