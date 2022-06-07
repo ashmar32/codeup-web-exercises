@@ -1,1 +1,7 @@
 "use strict";
+
+let i = 1;
+while (i < 65536) {
+    console.log(i);
+    i = i * 2;
+}
