@@ -63,15 +63,14 @@
      *  > last([1, 2, 3, 4, 5]) // return 5
      */
 
-    function firstElement() {
-
+    function firstElement(numberArray) {
+        return numberArray[0];
     }
-
-    function secondElement() {
-
+    function secondElement(numberArray) {
+        return numberArray[1];
     }
-
-    function lastElement() {
-
+    function lastElement(numberArray) {
+        return numberArray[4];
     }
-})();
+    alert('is this thing on?')
+});
