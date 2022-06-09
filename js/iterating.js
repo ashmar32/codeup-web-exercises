@@ -17,6 +17,7 @@
      * array.
      */
     // .length will log the number of elements in the name array
+
     console.log(names.length + ' elements in the array')
 
     /**
@@ -29,6 +30,7 @@
     console.log(names[1]);
     console.log(names[2]);
     console.log(names[3]);
+
     // access the element's index by calling on their number in console.log; remember that element index will start at 0 and continue up for the rest of the elements; if there is no more and an index is called it will return undefined.
     /**
      * TODO:
@@ -63,14 +65,15 @@
      *  > last([1, 2, 3, 4, 5]) // return 5
      */
 
-    function firstElement(numberArray) {
-        return numberArray[0];
-    }
-    function secondElement(numberArray) {
-        return numberArray[1];
-    }
-    function lastElement(numberArray) {
-        return numberArray[4];
-    }
-    alert('is this thing on?')
-});
+    function first(arr){
+        return arr[0]
+    };
+    function second(arr){
+        return arr[1]
+    };
+    function last(arr){
+        return arr[arr.length - 1];
+    };
+
+    console.log("The first element was " + first(names));
+})();
