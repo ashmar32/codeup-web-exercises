@@ -1,7 +1,7 @@
 "use strict";
 
-let i = 1;
-while (i < 65536) {
+let i = 2;
+while (i < 131072) {
     console.log(i);
     i = i * 2;
 }
