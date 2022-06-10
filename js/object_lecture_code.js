@@ -37,3 +37,42 @@ console.log(myHouse);
 myHouse["address"] = "1428 Elm Street";
 
 console.log(myHouse);
+
+//How to grab just 1 part of the group to use: IE send address, but not all other info about my house.
+
+console.log("Come on down to a block party at " + myHouse.address);
+console.log("Come on down to a block party at " + myHouse.address + ". You'll know it's my house because it is a " + myHouse.color);
+
+//Nesting other objects inside our objects
+
+myHouse.address = {
+    streetNum: 1428,
+    streetName: "Elm St.",
+    city: "Scary",
+    state: "Texas"
+
+}
+console.log(myHouse.color);
+
+//nested
+let otherCar = {
+    year: 2020,
+    make: "Toyota",
+    model: "Corolla",
+    owner: {
+        name: "Crystal",
+        age: 39
+    }
+}
+console.log("My other car is " + otherCar.owner.name + " 's car. She is " + otherCar.owner.age + " years old.")
+
+otherCar.horn = function (){
+    alert("HONK HONK")
+}
+console.log(otherCar.horn())
+
+let cars = [car, otherCar];
+let students = [{name: "chica"}, {name: "diana"}]
+
+console.log(cars);
+console.log(students);
