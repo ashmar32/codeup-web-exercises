@@ -15,6 +15,19 @@
         let person = new Object();
             person.firstName = "Ashley";
             person.lastName = "Martinez";
+            /*
+           var person = [{
+            firstName: "Ashley",
+            lastName: "Martinez",
+            age: 27
+            },
+            {
+            firstName: "Meghan",
+            lastName: "Ahrens",
+            age: 27
+            }];
+             */
+
 
     console.log(person.firstName);
     console.log(person.lastName);
@@ -31,7 +44,7 @@
      */
 
         person.sayHello = function (){
-            return "Hello from " + person.firstName + person.lastName + "!"
+            return "Hello from " + person.firstName + " " + person.lastName + "!"
         }
     console.log(person.sayHello())
 
@@ -55,6 +68,26 @@
         {name: 'George', amount: 320}
     ];
 
+    function getDiscount (input){
+        //create object to store discount info
+        let discount = {};
+        //save results of discount info to object for use later
+        discount.promotion = (input) - (input * .12);
+        discount.amountSaved = (input) - discount.promotion;
+        return discount;
+
+    }
+    shoppers.forEach(function (shopper){
+        //check if the total matches the criteria for output
+        if (shopper.amount > 200){
+           let discountedAmount = getDiscount(shopper.amount)
+            console.log(shopper.name + " , You spent: $" + shopper.amount + ". " + "Your discount is: " + discountedAmount.amountSaved + " Your total after discount is: " + (shopper.amount - discountedAmount.amountSaved))
+        }
+        else {
+
+        }
+
+    })
     /** TODO:
      * Create an array of objects that represent books and store it in a
      * variable named `books`. Each object should have a title and an author
