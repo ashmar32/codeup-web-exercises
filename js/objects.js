@@ -12,7 +12,7 @@
      *  > console.log(person.lastName) // "Sanchez"
      */
 
-        let person = new Object();
+        let person = new Object;
             person.firstName = "Ashley";
             person.lastName = "Martinez";
             /*
@@ -177,7 +177,7 @@
      */
     function showBookInfo(bookObject) {
         console.log("Title: " + bookObject.title)
-        console.log("Author: " + bookObject.author.firstName + " " + bookObject.author.lastName)
+        console.log("Author: " + bookObject.author.firstName + " " + bookObject.author.lastName + "\n------------------------------------------")
     }
 
     function createBook(title, author){
