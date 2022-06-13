@@ -81,10 +81,10 @@
         //check if the total matches the criteria for output
         if (shopper.amount > 200){
            let discountedAmount = getDiscount(shopper.amount)
-            console.log(shopper.name + " , You spent: $" + shopper.amount + ". " + "Your discount is: " + discountedAmount.amountSaved + " Your total after discount is: " + (shopper.amount - discountedAmount.amountSaved))
+            console.log(shopper.name + " , You spent: $" + shopper.amount + ". " + "Your discount is: $" + discountedAmount.amountSaved.toFixed(2) + " Your total after discount is: $" + (shopper.amount - discountedAmount.amountSaved))
         }
         else {
-
+            console.log(shopper.name + ", You spent: $" + shopper.amount + ". You didn't spend enough to qualify for the discount.")
         }
 
     })
