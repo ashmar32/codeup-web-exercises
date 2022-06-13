@@ -126,11 +126,11 @@
      *      ...
      */
 
-        let book1 = {}
-            book1.title = "The Salmon of Doubt";
-            book1.author = {}
-            book1.author.firstName = "Douglas"
-            book1.author.lastName = "Adams"
+        let book1 = createBook('The Salmon of Doubt', 'Douglas Adams')
+            // book1.title = "The Salmon of Doubt";
+            // book1.author = {}
+            // book1.author.firstName = "Douglas"
+            // book1.author.lastName = "Adams"
         let book2 = {}
             book2.title = "Walkaway"
             book2.author = {}
@@ -151,10 +151,16 @@
          for (let i = 0; i < books.length; i++) {
              let currentBook = books[i];
              let currentBookNumber = i + 1
-             console.log("Title: " + currentBook.title);
-             console.log("Author: " + currentBook.author.firstName + " " + currentBook.author.lastName)
+             // console.log("Title: " + currentBook.title);
+             // console.log("Author: " + currentBook.author.firstName + " " + currentBook.author.lastName)
              console.log("Book Number # " + currentBookNumber )
+             showBookInfo(currentBook)
     }
+    // forOf Loop: another loop to use
+    // for (const book of books) {
+    //     console.log("Title: " + book.title)
+    //     console.log("Author: " + book.author.firstName + " " + book.author.lastName)
+    // }
 
 
 
@@ -169,5 +175,25 @@
      *   outputs the information described above. Refactor your loop to use your
      *   `showBookInfo` function.
      */
+    function showBookInfo(bookObject) {
+        console.log("Title: " + bookObject.title)
+        console.log("Author: " + bookObject.author.firstName + " " + bookObject.author.lastName)
+    }
+
+    function createBook(title, author){
+        let nameArray = author.split(" ")
+        let authorFirstname = nameArray[0]
+        let authorLastname = nameArray[1]
+
+        let newBook = {}
+        newBook.title = title
+        newBook.author = {}
+        newBook.author.firstName = authorFirstname
+        newBook.author.lastName = authorLastname
+
+        return newBook;
+    }
+
+    console.log(createBook('harry Poter', 'JK Rowling'));
 
 })();
