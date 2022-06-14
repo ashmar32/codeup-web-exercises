@@ -127,20 +127,23 @@
      */
 
         let book1 = createBook('The Salmon of Doubt', 'Douglas Adams')
-            // book1.title = "The Salmon of Doubt";
-            // book1.author = {}
-            // book1.author.firstName = "Douglas"
-            // book1.author.lastName = "Adams"
+            book1.title = "The Salmon of Doubt";
+            book1.author = {}
+            book1.author.firstName = "Douglas"
+            book1.author.lastName = "Adams"
+            book1.author.age = 65
         let book2 = {}
             book2.title = "Walkaway"
             book2.author = {}
             book2.author.firstName = "Cory"
             book2.author.lastName = "Doctorow"
+            book2.author.age = 35
         let book3 = {}
             book3.title = "A Brief History of Time"
             book3.author = {}
             book3.author.firstName = "Stephen"
             book3.author.lastName = "Hawking"
+            book3.author.age = 45
         let books = [book1, book2, book3]
 
             // console.log(books)
@@ -195,5 +198,35 @@
     }
 
     console.log(createBook('harry Poter', 'JK Rowling'));
+
+
+
+// use MAP to produce an array of just book titles; using the function from above
+
+let bookTitles = books.map(function (book) {
+    return book.title;
+})
+console.log(bookTitles)
+
+//use FILTER to produce a subset of books for authors age 30+
+const boomerBooks = books.filter(function (book) {
+//    return true if we want book in the output array
+    if (book.author.age >= 30) {
+        return true;
+    }
+})
+
+//use REDUCE to sum the author ages
+const sumAge = books.reduce(function (totalAgeSoFar, book) {
+    return totalAgeSoFar + book.author.age;
+}, 0);
+console.log(sumAge);
+console.log(sumAge / books.length);
+
+    const minAge = books.reduce(function (minAgeSoFar, book){
+
+    }, Infinity);
+    console.log(minAge); // should return 35
+
 
 })();
