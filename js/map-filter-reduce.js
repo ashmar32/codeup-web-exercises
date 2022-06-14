@@ -64,3 +64,12 @@ if (longestEmailSoFar.length >= user.email.length){
 else return user.email
 }, "");
 console.log(longestEmail)
+
+// Use .reduce to get the list of user's names in a single string. Example: Your instructors are: ryan, luis, zach, fernando, justin.
+
+const instructorList = users.reduce(function (listOfNames, user) {
+if () {
+    return ;
+}
+else return ;
+}, )
