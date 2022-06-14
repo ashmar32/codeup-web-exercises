@@ -54,11 +54,12 @@ console.log(userEmail)
 const sumExperience = users.reduce(function (totalYearsExperience, userYears) {
     return totalYearsExperience + userYears.yearsOfExperience;
 }, 0);
+
 console.log(sumExperience + " years of experience")
 
 //Use .reduce to get the longest email from the list of users.
 const longestEmail = users.reduce(function (longestEmailSoFar, user){
-if (longestEmailSoFar.length >= user.email.length){
+if (user.email.length > longestEmailSoFar.length ){
     return longestEmailSoFar;
 }
 else return user.email
@@ -67,9 +68,26 @@ console.log(longestEmail)
 
 // Use .reduce to get the list of user's names in a single string. Example: Your instructors are: ryan, luis, zach, fernando, justin.
 
-const instructorList = users.reduce(function (listOfNames, user) {
-if () {
-    return ;
-}
-else return ;
-}, )
+const allUserNames = users.reduce(function (allUserNamesSoFar, user) {
+
+    return allUserNamesSoFar + user.name + ", ";
+}, "");
+
+console.log(allUserNames)
+// //this makes "," come out after the names. We don't want that so let's try this:
+// allUserNames = allUserNames.substr(0, allUserNames.length - 2);
+
+// let allUserNames = users.reduce(function (allUserNamesSoFar, user) {
+//    return allUserNamesSoFar.push(user.name);
+// }, []);
+//^^^This is still a WIP
+
+//Use .reduce to get the unique list of languages from the list of users
+let uniqueLanguages = users.reduce(function (uniqueSoFar, user) {
+    for (let language of user.languages) {
+        uniqueSoFar.add(language)
+    }
+    return uniqueSoFar;
+}, new Set());
+console.log(uniqueLanguages)
+
