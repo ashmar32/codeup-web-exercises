@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forms Lecture</title>
+</head>
+<body>
+<!--note the difference between the query strings..."GET" will display form data in url bar-->
+<form method="POST" action="https://request-inspector.glitch.me">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text">
+    <br>
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password">
+    <br>
+
+    <input type="submit">
+</form>
+<br>
+<br>
+<!--    GET REQUEST-->
+<form action="https://request-inspector.glitch.me" method="GET">
+    <label for="zipcode">Zipcode</label>
+    <input type="text" name="zipcode" id="zipcode" placeholder="this will show to the user">
+    <button type="submit">Search</button>
+</form>
+
+<a href="https://request-inspector.glitch.me?zipcode=78205">Search in ZIP Code 78205</a>
+<br>
+<br>
+<!--Submitting-->
+
+<input type="submit">
+<br>
+<br>
+<button type="submit">Submit the form</button>
+<!--Common form Input Elements-->
+<br>
+<br>
+<!--text area-->
+<textarea name="comment"></textarea>
+<!--Checkbox and radio buttons-->
+<input name="newsletter_signup" value="false" type="checkbox" checked>Sign Up For The Email Newsletter
+<br>
+A <input type="radio" name="quiz_question_1" value="a"><br>
+B <input type="radio" name="quiz_question_1" value="b"><br>
+C <input type="radio" name="quiz_question_1" value="c"><br>
+D <input type="radio" name="quiz_question_1" value="d"><br>
+
+<!--select elements-->
+<select name="coffee_preference">
+    <option value="light">Light Roast</option>
+    <option value="dark">Dark Roast</option>
+    <option value="espresso">Espresso Blend</option>
+</select>
+
+<!--hidden inputs-->
+<br>
+<br>
+<input type="hidden" name="user_id" value="432">
+<br>
+<br>
+<!--disabled value-->
+<input type="text" name="username" value="codeup" disabled>
+
+<select name="newsletter_signup">
+    <option disabled value="n">No</option>
+    <option selected value="y">Yes</option>
+<br>
+<br>
+<br>
+<!--    labels-->
+    <form method="GET" action="https://request-inspector.glitch.me">
+        <h2>What kind of phone do you own?</h2>
+        <label for="android">
+            Android <input id="android" type="checkbox" name="phones" value="android">
+        </label>
+        <label for="ios">
+            iOS <input id="ios" type="checkbox" name="phones" value="ios">
+        </label>
+        <label for="windows">
+            Windows <input id="windows" type="checkbox" name="phones" value="windows">
+        </label>
+        <label for="other">
+            Other <input id="other" type="checkbox" name="phones" value="other">
+        </label>
+    </form>
+</select>
+</body>
+</html>
