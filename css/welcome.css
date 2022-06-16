@@ -1,0 +1,50 @@
+h1 { text-align: center; }
+
+h1, h2 {
+    color: crimson;
+    text-decoration: underline;
+}
+
+html {
+    background-color: lightcoral;
+    font-family: Palatino;
+}
+
+body {
+    background-image: url("https://www.logolynx.com/images/logolynx/59/59544fbd814158ffca4acde23e66c4a2.jpeg");
+    background-repeat: repeat;
+    background-size: auto;
+}
+
+ol {list-style: square}
+ul {list-style: circle}
+
+th {
+    background-color: black;
+    color: lightcoral;
+}
+td, tr, th {
+    padding: 15px;
+    text-align: left;
+}
+
+td, th {
+    border-bottom: 2px solid black;
+}
+td {
+    background-color: lightgray;
+}
+
+p {
+    color: crimson;
+    text-align: center;
+}
+
+a:hover, a:active {
+    background-color: lightcoral;
+    color: white;
+}
+
+a {
+    color: crimson;
+}
