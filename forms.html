@@ -5,7 +5,7 @@
     <title>Register With Us</title>
 </head>
 <body>
-<form method="POST" action="https://request-inspector.glitch.me/">
+<form method="POST" action="https://request-inspector.glitch.me/" id="myForm">
 
     <label for="email">Email Address</label>
     <input id="email" name="email" type="text" placeholder="Your Email Address">
@@ -14,16 +14,20 @@
     <input id="password" name="password" type="password" placeholder="Your Password Here">
     <br>
     <br>
-    <textarea name="bio" placeholder="Tell us about yourself"></textarea>
+    <label for="bio">Bio</label><br>
+    <textarea id="bio" name="bio" form="myForm" placeholder="Tell us about yourself"></textarea>
     <br>
     <br>
     <h2>How did you hear about us?</h2>
-    <input type="radio" name="referral_question_1" value="a"> Billboard<br>
+<!--    label's her would allow you to select the words to choose your options-->
+    <input id="billboard" type="radio" name="referral_question_1" value="a">
+    <label for="billboard">Billboard</label>
     <input type="radio" name="referral_question_2" value="b"> Radio Advertisement<br>
     <input type="radio" name="referral_question_3" value="c"> Internet advertisement<br>
     <input type="radio" name="referral_question_4" value="d"> Other<br>
-    <h2>What web browser are you using?</h2>
-    <select name="web_browser">
+<!--    labels need to be added to everything, keep name and id the same-->
+    <label for="webBrowser"><h2>What web browser are you using?</h2></label>
+    <select id="webBrowser" name="webBrowser">
         <option value="Chrome">Google Chrome</option>
         <option value="Firefox">Mozilla Firefox</option>
         <option value="Safari">Apple Safari</option>
