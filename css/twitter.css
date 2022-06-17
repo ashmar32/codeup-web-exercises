@@ -53,7 +53,7 @@ a {
 }
 .profile-image {
     position: absolute;
-    top: 250px;
+    top: 300px;
 }
 .profile-form {
     float: right;
@@ -103,4 +103,13 @@ a {
     border-bottom: 1px solid var(--separator-color);
     padding: .5em;
     overflow: auto;
+}
+.media-image {
+    max-width: 50px;
+    float: left;
+    margin-top: 1.33em;
+}
+.media-body {
+    width: calc(100% - 50px);
+    float: left;
 }
