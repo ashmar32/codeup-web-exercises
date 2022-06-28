@@ -15,7 +15,7 @@ function sayHello(name){
 
 }
 
-console.log(sayHello("ashley"))
+console.log(sayHello("Ashley"))
 /**
  * TODO:
  * Call the function 'sayHello' and pass your name as a string literal argument.
