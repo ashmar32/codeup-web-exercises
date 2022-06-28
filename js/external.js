@@ -21,11 +21,16 @@ let totalGoogle = prompt("Hey, How many hours did you work for Google?")
 let totalAmazon = prompt("Hey, How many hours did you work for Amazon?")
 let totalfaceBook = prompt("Hey, How many hours did you work for Facebook?")
 
-let sumGoogle = googlePay * totalGoogle
-alert("It meets this criteria" + (moreThanTwo && offerStillValid || premiumMember) + " that you get a hat and discount")alert("You will earn $" +sumGoogle + " from working at Google. You'll earn $" + (totalAmazon * amazonPay) + "from amazon. Finally, you'll earn $" + (totalfaceBook * facebookPay) + "from facebook." + let timeInSchedule = confirm("Hey do you have time in your schedule for this class?")
-let roomInClass = confirm("Did the class have room for an additional student?")
-alert("It is " + (roomInClass && timeInSchedule) + " that you can attend this class with what you told me")
-
 let moreThanTwo = confirm("Do you have more than two items in your cart?")
 let offerStillValid = confirm("Is offer on the product still valid?")
 let premiumMember = confirm("Are you a premium member?")
+
+
+let sumGoogle = googlePay * totalGoogle
+alert("It meets this criteria" + (moreThanTwo && offerStillValid || premiumMember) + " that you get a hat and discount")
+alert("You will earn $" +sumGoogle + " from working at Google. You'll earn $" + (totalAmazon * amazonPay) + "from amazon. Finally, you'll earn $" + (totalfaceBook * facebookPay) + "from facebook.")
+let timeInSchedule = confirm("Hey do you have time in your schedule for this class?")
+let roomInClass = confirm("Did the class have room for an additional student?")
+alert("It is " + (roomInClass && timeInSchedule) + " that you can attend this class with what you told me")
+
+
