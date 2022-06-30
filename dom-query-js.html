@@ -42,8 +42,8 @@
         // TODO: Set inner html of mainHeader to "JavaScript is Cool"
         function changeMainHeader (event) {
             mainHeader.innerHTML = "JavaScript is da DOM";
-            var btn1 = document.getElementById('btn1');
         }
+        var btn1 = document.getElementById('btn1');
         btn1.addEventListener('click', changeMainHeader);
 
         // TODO: Uncomment the next line and get the sub header element by id
@@ -53,8 +53,8 @@
         // TODO: Set the text color of subHeader to blue
         function changeSubHeader (event) {
             subHeader.style.color = "blue";// subHeader.style['color'] = "#0000FF";
-            var btn2 = document.getElementById('btn2')
         }
+        var btn2 = document.getElementById('btn2')
         btn2.addEventListener('click', changeSubHeader)
 
         // TODO: Uncomment the next line and get all list items
@@ -68,15 +68,15 @@
                 //if(i % 2 ===0)
                 listItems[i].style.color = "#808080"
             }
-            var btn3 = document.getElementById('btn3');
         }
+        var btn3 = document.getElementById('btn3');
         btn3.addEventListener('click', changeList)
 
         // TODO: Set text color of li with data-dbid = 1 to blue
         function changeDataDbidColor () {
             document.querySelector("[data-dbid = '1']").style.color = "#0000ff";
-            var btn4 = document.getElementById('btn4');
         }
+        var btn4 = document.getElementById('btn4');
         btn4.addEventListener('click', changeDataDbidColor)
         //ooorr this thing
         // for (let i = 0; i < listItems.length; i++) {
