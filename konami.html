@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Konami Code</h1>
+
+
+<script>
+    "use strict";
+
+    //need to record and keep track of keys entered; IT NEEDS TO BE GLOBAL!
+    let keysPressed = [];
+
+
+
+    // let cheatCode = "ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight,b,a,Enter";
+    // let userInput = [''];
+
+    document.addEventListener("keyup", function(event) {
+        keysPressed.push(event.key);
+        console.log(keysPressed.toString());
+
+        if (enteredKonamiCode() === true) {
+            return alert("YOU GOT 30 LIVES!!!")
+        }
+    });
+
+    function enteredKonamiCode() {
+        let konamiCode = "ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight,b,a,Enter";
+        if (keysPressed.toString().includes(konamiCode) === true) {
+            return true;
+        }
+        return false;
+    }
+</script>
+</body>
+</html>
