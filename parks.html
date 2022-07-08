@@ -3,15 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Parks</title>
-    <style>
-        .invisible {
-            visibility: hidden;
-            /*display: none;*/
-        }
-        .green-background {
-            background-color: green;
-        }
-    </style>
+    <link rel="stylesheet" href="css/parks-style.css">
 </head>
 <body>
 <h1>National Parks FAQ</h1>
@@ -39,8 +31,42 @@
 </dl>
 <!--<a id="inviso-toggle" href="">Toggle Visibility</a>-->
 <button id="inviso-toggle">Toggle Visibility</button>
+<br>
+<h1>Parks List</h1>
+<div id="national-parks-div">
+    <h3 id="national-parks-heading">National Parks</h3>
+    <ul id="national-parks">
+        <li>Arches</li>
+        <li>Badlands</li>
+        <li>Carlsbad Caverns</li>
+        <li>Denali</li>
+        <li>Everglades</li>
+    </ul>
+</div>
+<div id="state-parks-div">
+    <h3 id="state-parks-heading">State Parks of Texas</h3>
+    <ul id="state-parks-texas">
+        <li>Abilene</li>
+        <li>Big Bend</li>
+        <li>Choke Canyon</li>
+        <li>Davis Mountains</li>
+        <li>Enchanted Rock</li>
+    </ul>
+</div>
+<div id="city-parks-div">
+    <h3 id="city-parks-heading">City Parks of Texas</h3>
+    <ul id="city-parks-texas">
+        <li>Alamo Plaza Park</li>
+        <li>Bamberger Nature Park</li>
+        <li>Comanche Lookout Park</li>
+        <li>Denman Estate Park</li>
+        <li>Espada Park</li>
+    </ul>
+</div>
+<button id="li-background-btn">Add some color</button>
+
 <script>
-    // 1. get a reference for the anchor
+    // 1. get a reference for the button
     const myToggle = document.querySelector("#inviso-toggle");
     // 2. add a click event listener to the anchor
     myToggle.addEventListener("click", function(event) {
@@ -59,10 +85,38 @@
         // 2. add a click event listener to each dt element
         dt.addEventListener("click", function(event) {
             // 3. when it is clicked, turn its background color to green
-            // this.style.backgroundColor = "green";
+            // this.style.backgroundColor = "green"; this is setup through css
             this.classList.toggle("green-background");
-        });
-    })
+        })
+    });
+    // Create a button that, when clicked, makes the last li in each ul have a yellow background.
+    //reference the btn with querySelector and the id using #
+    const liBackgroundBtn = document.querySelector("#li-background-btn")
+    //add event listener for the button
+    liBackgroundBtn.addEventListener("click", function (event) {
+        //target what we want to do with the listener "ul"
+        const myULs = document.querySelectorAll("ul");
+        myULs.forEach(function (ul) {
+          ul.lastElementChild.classList.toggle("yellow-background");
+        })
+    });
+
+// When any h3 is clicked, the list underneath it should be bolded. Use fontWeight = "bold" to achieve this. Hint: you should use this in the event listener to access the next sibling of the h3 that is clicked. Also, an h3 is like an aunt or uncle to its corresponding lis
+    const myH3s = document.querySelectorAll("h3");
+    myH3s.forEach(function (h3) {
+        h3.addEventListener("click", function (event) {
+        this.nextElementSibling.classList.toggle("h3-fw")
+        })
+    });
+
+// When any list item is clicked, first li of the parent ul should have a font color of blue. Hint: you should again rely on this in the li event handler.
+    const lis = document.querySelectorAll("li");
+    lis.forEach(function (li) {
+        li.addEventListener("click", function (event) {
+            this.parentElement.firstElementChild.classList.toggle("first-li")
+        })
+    });
+
 </script>
 </body>
 </html>
