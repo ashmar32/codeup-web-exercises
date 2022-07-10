@@ -8,35 +8,21 @@
         // add your code here
 
         function addTodo() {
-    //         todoContainer.innerHTML += `<div class="card col-2">
-    //   <div class="card-body">
-    //     ${getInput.value}
-    //   </div>
-    //   <div class="card-footer">
-    //     <button class="delete-todo">Delete Todo</button>
-    //   </div>
-    // </div>`
-    //         Create an "li" node:
-            const node = document.createElement("div");
-
-// Create a text node:
-            const textnode = document.createTextNode(getInput.value);
-
-// Append the text node to the "li" node:
-            node.appendChild(textnode);
-
-// Append the "li" node to the list:
-            todoContainer.appendChild(node);
-
-
-            //  get input
-
+            let card = document.createElement("div")
+                    card.classList.add("card", "col-2")
+            card.innerHTML += `<div class="card-body">
+<!--get input-->
+        ${getInput.value}
+      </div>
+      <div class="card-footer">
+        <button class="delete-todo">Delete Todo</button>
+      </div>`
             // add a new Todo card as a child of the div with id my-todos.
+            todoContainer.appendChild(card);
         }
-
         function deleteTodo(event) {
             //  get last item from list
-
+let lastLi =
             //  remove item from list
 
         }
