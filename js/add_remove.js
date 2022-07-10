@@ -5,6 +5,9 @@
         addBtn.addEventListener("click", addTodo);
         const getInput = document.querySelector("#add-todo-text");
         const todoContainer = document.querySelector("#my-todos");
+        const deleteBtn = document.querySelector(".delete-todo");
+        deleteBtn.addEventListener("click", deleteTodo);
+        console.log("hi")
         // add your code here
 
         function addTodo() {
@@ -22,9 +25,9 @@
         }
         function deleteTodo(event) {
             //  get last item from list
-let lastLi =
             //  remove item from list
-
+            let removeItem = document.querySelector("#my-todos");
+                this.parentElement.removeChild(removeItem)
         }
 
     });
