@@ -48,7 +48,7 @@
                     <td>${tools[i].title}</td>
                     <td>${tools[i].quantity}</td>
                     <td>${tools[i].price}</td>
-                    <td>${tools[i].categories}</td>
+                    <td>${tools[i].categories.join(", ")}</td>
             </tr>`
             let tbody = document.querySelector("#insertProducts")
             tbody.innerHTML += row

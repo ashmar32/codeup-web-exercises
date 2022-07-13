@@ -20,16 +20,16 @@
                 return await response.json();
         })
     console.log(post)
-    let div = document.querySelector("#post");
+    let myPost = document.querySelector("#post");
     for (let i = 0; i < post.length; i++) {
-        let postFormat =
+        let newPost =
             `
                 <h1>${post[i].title}</h1>
                 <p>${post[i].content}</p>
-                <h4>${post[i]["categories"]}</h4>
+                <h4>${post[i].categories.join(", ")}</h4>
             `
 
-        div.innerHTML += postFormat
+        myPost.innerHTML += newPost
     }
 })();
 
