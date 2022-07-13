@@ -1,0 +1,13 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    font-family: Chalkduster;
+    background-color: #b4d455;
+
+}
+body {
+    background-image: url("/images/tools.jpg");
+    background-size: cover;
+    opacity: 1;
+}
