@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<meta charset="UTF-8">
+<title>My Blog</title>
 </head>
 <body>
 <div id="post">
 </div>
+<script>
+(async function() {
+    "use strict";
+    const post = await fetch("data/blog.json")
+        .then(async function (response) {
+            if (response.status !== 200) {
+                console.log("can't read blog file");
+                return [];
+            } else
+                return await response.json();
+        })
+    console.log(post)
+    let div = document.querySelector("#post");
+    for (let i = 0; i < post.length; i++) {
+        let postFormat =
+            `
+                <h1>${post[i].title}</h1>
+                <p>${post[i].content}</p>
+                <h4>${post[i]["categories"]}</h4>
+            `
+
+        div.innerHTML += postFormat
+    }
+})();
+
+
+
+</script>
 </body>
 </html>

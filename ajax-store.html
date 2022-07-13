@@ -28,15 +28,29 @@
             .then(async function (response) {
                 if(response.status !== 200) {
                     console.log("cannot read tools file");
-                    return "";
+                    return [];
                 } else
                     return await response.json();
             });
+        console.log(tools)
+
 
         // TODO: Take the data from inventory.json and append it to the products table
         //       HINT: Your data should come back as a JSON object; use console.log() to inspect
         //             its contents and fields
         //       HINT: You will want to target #insertProducts for your new HTML elements
+        for (let i = 0; i < tools.length; i++) {
+            console.log(tools[i])
+            let row =
+                `<tr>
+                    <td>${tools[i].title}</td>
+                    <td>${tools[i].quantity}</td>
+                    <td>${tools[i].price}</td>
+                    <td>${tools[i].categories}</td>
+            </tr>`
+            let tbody = document.querySelector("#insertProducts")
+            tbody.innerHTML += row
+        }
     })();
 </script>
 
