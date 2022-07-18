@@ -39,23 +39,28 @@
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v9',
         zoom: 10,
-        center: [-98.4916, 29.4252]
+        //coords are for codeup
+        center: [-98.72984742024533, 29.43094268749772]
     });
-    //add a marker: this one is for the mi Hacienda!!!
-    var marker = new mapboxgl.Marker()
-        .setLngLat([-98.72982541609142, 29.430952044683767])
-        .addTo(map);
+    var miHaciendaInfo = {
+        address: "12024 FM1957, San Antonio, TX 78253",
+        popupHTML: "<p>Yummy Mexican Food!</p>"
+    };
 
+    function placeMarkerAndPopup(info, token, map) {
+        geocode(info.address, token).then(function(coordinates) {
+            var popup = new mapboxgl.Popup()
+                .setHTML(info.popupHTML);
+            var marker = new mapboxgl.Marker()
+                .setLngLat(coordinates)
+                .addTo(map)
+                .setPopup(popup);
+            popup.addTo(map);
+        });
+    }
 
+    placeMarkerAndPopup(miHaciendaInfo, MAPBOX_API_KEY, map);
 
-    // add the search btn functionality
-    const searchBtn = document.querySelector("#map-search");
-    searchBtn.addEventListener("click", async function(event) {
-        // 1. get the address from the text input
-        const addressInput = document.querySelector("#address-input");
-        const newAddress = addressInput.value
-        console.log("hi")
-    });
 
 
 </script>

@@ -2,280 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mapbox Api</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
-    <script src="js/keys.js"></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet'>
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
-
+    <title>Map Marker Example</title>
+    <!-- Mapbox CSS -->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- Custom CSS -->
     <style>
-        body {
-            background-color: #282828;
-            padding: 0;
-            margin: 0;
-            color: rgba(245, 245, 245, .9);
-        }
         #map {
-            color: black;
-        }
-        .card-styling {
-            background-color: #b3b3b3;
-        }
-        .mapboxgl-popup-content {
-            padding: 0;
+            /* the width and height may be set to any size */
+            width: 100%;
+            height: 700px;
         }
     </style>
 </head>
 <body>
 
+<h1>My First Mapbox Map!</h1>
 
+<!-- The HTML element that serves as the Mapbox container -->
+<div id='map'></div>
 
+<!-- Mapbox JS -->
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 
-
-<div id='map' style='width: 100%; height: 600px;'></div>
-
-<div class="container-fluid mt-3">
-    <div class="row">
-        <div class="col-2 text-center">
-            <h6 class="">Zoom</h6>
-            <button id="increase-zoom-btn" class="btn btn-dark">+</button>
-            <button id="decrease-zoom-btn" class="btn btn-dark">-</button>
-        </div>
-        <div class="col-3 text-center">
-            <h6>Set Zoom to:</h6>
-            <button id="zoom-5" class="btn btn-dark text-white">5</button>
-            <button id="zoom-15" class="btn btn-dark text-white">15</button>
-            <button id="zoom-20" class="btn btn-dark text-white">20</button>
-        </div>
-        <div class="col-4 text-center">
-            <h6>Search Address:</h6>
-            <div class="input-group mb-3">
-                <input id="addressSearch" type="text" class="form-control bg-dark text-white" placeholder="Address.." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button id="addressSearchBtn" class="btn btn-outline-light btn-dark text-white" type="button"><i class="bi bi-arrow-right-circle"></i></button>
-                </div>
-            </div>
-        </div>
-        <div class="col-3 text-center">
-            <h6>Reset Markers:</h6>
-            <button id="resetBtn" class="btn btn-dark text-white">Reset</button>
-        </div>
-
-    </div>
-</div>
-
+<!-- Mapbox Geocoder Util Methods -->
 <script src="js/mapbox-geocoder-utils.js"></script>
-<script src="js/jquery-2.2.4.js"></script>
+
+<!-- Custom JS -->
 <script>
 
-    //Declaring favorite resturants array of objects
-    let favoriteResturants = [
-        {
-            name: 'Chama Gaúcha',
-            type: 'Brazilian steakhouse',
-            rating: 4.9,
-            location: '18318 Sonterra Pl, San Antonio, TX 78258'
-        },
-        {
-            name: 'Olive Garden',
-            type: 'Italian',
-            rating: 4.3,
-            location: '15814 I-10 West, San Antonio, TX 78257'
-        },
-        {
-            name: 'Texas Roadhouse',
-            type: 'Steak House',
-            rating: 4.3,
-            location: '6616 W Loop 1604 N, San Antonio, TX 78254'
-        },
-        {
-            name: 'Hopdoddy Burger Bar',
-            type: 'Burger Bar',
-            rating: 4.3,
-            location: '17623 La Cantera Pkwy Suite 101, San Antonio, TX 78257'
-        }
-    ]
+    var accessToken = "pk.eyJ1IjoibWFkbWFyY29zIiwiYSI6ImNsNXF3MzMwMTEzeG8zanBjbHh0cHB3bGQifQ.bPRH-1gcYZ0RjnsfUkkd5w";
 
-    //initalizing empty array that will take in markers that are added so we can clear the array to clear all of them
-    let currentMarkers = [];
-    // initializing variables for popups and custom marker
-    let chaumaPopup = '';
-    let olivePopup = '';
-    let texasRoadhousePopup = '';
-    let hopPopup = '';
-    let customMarker = '';
-    //assinging the acces token to mapboxgl.accessToken
-    mapboxgl.accessToken = MAPBOXGL_ACCESS_TOKEN;
-    //initializes the map
-    const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        style: 'mapbox://styles/mapbox/dark-v10', // style URL
-        center: [-98.4916, 29.4252], // starting position [lng, lat]
-        zoom: 9.5 // starting zoom
+    mapboxgl.accessToken = accessToken;
 
-    });
-    //disable double click zoom
-    map.doubleClickZoom.disable();
-    //dbl click event will add a marker on the pointer's current lang and long, adds it to the map
-    map.on('dblclick', function (event) {
-        console.log(event.lngLat);
-        let addedMarker = new mapboxgl.Marker()
-            .setLngLat(event.lngLat)
-            .addTo(map);
-//pushes addedMarker to the current markers array
-        currentMarkers.push(addedMarker);
-//calls reverseGeocode function with the events lngLat, returns the address to a popup connected to the addedMarker
-        reverseGeocode(event.lngLat, MAPBOXGL_ACCESS_TOKEN).then(function(results) {
-            let addedPopup = new mapboxgl.Popup()
-                .setHTML(`<p>${results}</p>`)
-            addedMarker.setPopup(addedPopup);
-        })
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        zoom: 10,
+        center: [-98.4916, 29.4252]
     });
 
+    var alamoInfo = {
+        address: "The Alamo",
+        popupHTML: "<p>Remember the Alamo!</p>"
+    };
 
-
-
-
-
-
-    //adds an address search in the mapbox element itself
-    map.addControl(
-        new MapboxGeocoder({
-            accessToken: MAPBOXGL_ACCESS_TOKEN,
-            mapboxgl: mapboxgl,
-            marker: false
-        })
-    );
-
-    //function zooms in on map
-    function increaseZoom () {
-        map.zoomIn();
-        console.log('test')
-    }
-    //function zooms out of map
-    function decreaseZoom () {
-        map.zoomOut();
-    }
-    //function sets the zoom to the value of the button, takes the html and parseInt's it
-    function setZoom () {
-        let zoomLevel = parseInt($(this).html());
-        map.setZoom(zoomLevel);
-    }
-    //function takes the value of inout field and uses that to search that address and place a amrker
-    function searchAddress () {
-
-        geocode($('#addressSearch').val(), MAPBOXGL_ACCESS_TOKEN).then(function(result) {
-            customMarker = new mapboxgl.Marker({color: "#00ffa8"}).setLngLat([result[0], result[1]]).addTo(map);
-            currentMarkers.push(customMarker);
-            map.setCenter(result);
-            map.setZoom(15);
-        });
-    }
-    //Function loops through currentMarkers array and removes them from array, clearing the entire array
-    function resetMarkers () {
-        currentMarkers.forEach(function (marker) {
-            marker.remove();
-        })
-    }
-
-
-
-    function displayCardInfo(index) {
-        return `
-                <h5 class="card-title border-bottom border-dark pb-1">${index.name}</h5>
-                <p class="card-text">${index.location}</p>
-                <p class="card-text">${index.type}</p>
-                <p class="card-text">Rating: ${index.rating}/5</p>
-                `;
-    }
-
-
-    function displayPopups() {
-        favoriteResturants.forEach(function (resturant){
-            if (resturant.name === 'Chama Gaúcha') {
-                chaumaPopup = new mapboxgl.Popup()
-                    .setMaxWidth('300px')
-                    .setHTML(`
-                            <div class="card card-styling" style="width: 100%;">
-                                <img class="card-img-top" src="https://scontent-hou1-1.xx.fbcdn.net/v/t1.6435-9/139789710_100739078690717_3379758862774488587_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=e3f864&_nc_ohc=KxPw_kzz5yoAX8sZ0HQ&_nc_ht=scontent-hou1-1.xx&oh=00_AT_bs20NW32qUwmeMpuF0aFMDQ3Jxb5rSMg5dstMB5QLaw&oe=6225CFB0" alt="Card image cap">
-                                <div class="card-body ">
-                                    ${displayCardInfo(resturant)}
-                                    <a href="https://chamagaucha.com/" class="btn btn-dark">Go somewhere</a>
-                                </div>
-                            </div>
-                        `)
-            }
-            if (resturant.name === 'Olive Garden') {
-                olivePopup = new mapboxgl.Popup()
-                    .setHTML(`
-                            <div class="card card-styling" style="width: 100%;">
-                                <img class="card-img-top" src="https://media.olivegarden.com/en_us/images/product/classic-chicken-alfredo-dinner-dpv-590x365.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                     ${displayCardInfo(resturant)}
-                                    <a href="https://olivegarden.com/" class="btn btn-dark">Go somewhere</a>
-                                </div>
-                            </div>
-                        `)
-            }
-            if (resturant.name === 'Texas Roadhouse') {
-                texasRoadhousePopup = new mapboxgl.Popup()
-                    .setHTML(`
-                            <div class="card card-styling" style="width: 100%;">
-                                <img class="card-img-top" src="https://i.insider.com/5d029e166fc92003bc28ee09?width=2000&format=jpeg&auto=webp" alt="Card image cap">
-                                <div class="card-body">
-                                     ${displayCardInfo(resturant)}
-                                    <a href="https://texasroadhouse.com/" class="btn btn-dark">Go somewhere</a>
-                                </div>
-                            </div>
-                        `)
-            }
-            if (resturant.name === 'Hopdoddy Burger Bar') {
-                hopPopup = new mapboxgl.Popup()
-                    .setHTML(`
-                            <div class="card card-styling" style="width: 100%;">
-                                <img class="card-img-top" src="https://austinfoodmagazine.com/wp-content/uploads/2019/10/truffle-mac-with-fries.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                     ${displayCardInfo(resturant)}
-                                    <a href="https://hopdoddy.com/" class="btn btn-dark">Go somewhere</a>
-                                </div>
-                            </div>
-                        `)
-            }
+    function placeMarkerAndPopup(info, token, map) {
+        geocode(info.address, token).then(function(coordinates) {
+            var popup = new mapboxgl.Popup()
+                .setHTML(info.popupHTML);
+            var marker = new mapboxgl.Marker()
+                .setLngLat(coordinates)
+                .addTo(map)
+                .setPopup(popup);
+            popup.addTo(map);
         });
     }
 
-    geocode("18318 Sonterra Pl, San Antonio, TX 78258", MAPBOXGL_ACCESS_TOKEN).then(function(result) {
-        let chaumaMarker = new mapboxgl.Marker().setLngLat([result[0], result[1]]).addTo(map)
-        chaumaMarker.setPopup(chaumaPopup);
-        currentMarkers.push(chaumaMarker);
-    });
-    geocode("15814 I-10 West, San Antonio, TX 78257", MAPBOXGL_ACCESS_TOKEN).then(function(result) {
-        let oliveMarker = new mapboxgl.Marker().setLngLat([result[0], result[1]]).addTo(map)
-        oliveMarker.setPopup(olivePopup);
-        currentMarkers.push(oliveMarker);
-    });
-    geocode("6616 W Loop 1604 N, San Antonio, TX 78254", MAPBOXGL_ACCESS_TOKEN).then(function(result) {
-        let texasRoadhouseMarker = new mapboxgl.Marker().setLngLat([result[0], result[1]]).addTo(map)
-        texasRoadhouseMarker.setPopup(texasRoadhousePopup);
-        currentMarkers.push(texasRoadhouseMarker);
-    });
-    geocode("17623 La Cantera Pkwy Suite 101, San Antonio, TX 78257", MAPBOXGL_ACCESS_TOKEN).then(function(result) {
-        let hopMarker = new mapboxgl.Marker().setLngLat([result[0], result[1]]).addTo(map)
-        hopMarker.setPopup(hopPopup);
-        currentMarkers.push(hopMarker);
-    });
-
-    $('#increase-zoom-btn').click(increaseZoom);
-    $('#decrease-zoom-btn').click(decreaseZoom);
-    $('#zoom-5').click(setZoom);
-    $('#zoom-15').click(setZoom);
-    $('#zoom-20').click(setZoom);
-    $('#addressSearchBtn').click(searchAddress);
-    $('#resetBtn').click(resetMarkers);
-    displayPopups();
+    placeMarkerAndPopup(alamoInfo, accessToken, map);
 
 </script>
 </body>
