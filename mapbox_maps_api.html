@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>First Mapbox Map</title>
+    <title>Mapbox Maps API!</title>
     <!-- Mapbox CSS -->
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
     <!-- Custom CSS -->
@@ -12,13 +12,13 @@
         #map {
             /* the width and height may be set to any size */
             width: 100%;
-            height: 700px;
+            height: 500px;
         }
     </style>
 </head>
 <body>
 
-<h1>My First Mapbox Map!</h1>
+<h1>Mapbox Maps API!</h1>
 
 <!-- The HTML element that serves as the Mapbox container -->
 <div id='map'></div>
@@ -29,7 +29,7 @@
 <!-- Mapbox JS -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <!-- Mapbox Geocoder Util Methods -->
-<script src="mapbox-geocoder-utils.js"></script>
+<script src="js/mapbox-geocoder-utils.js"></script>
 
 <!-- Custom JS -->
 <script src="js/keys.js"></script>
@@ -41,6 +41,23 @@
         zoom: 10,
         center: [-98.4916, 29.4252]
     });
+    //add a marker: this one is for the mi Hacienda!!!
+    var marker = new mapboxgl.Marker()
+        .setLngLat([-98.72982541609142, 29.430952044683767])
+        .addTo(map);
+
+
+
+    // add the search btn functionality
+    const searchBtn = document.querySelector("#map-search");
+    searchBtn.addEventListener("click", async function(event) {
+        // 1. get the address from the text input
+        const addressInput = document.querySelector("#address-input");
+        const newAddress = addressInput.value
+        console.log("hi")
+    });
+
+
 </script>
 </body>
 </html>
