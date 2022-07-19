@@ -25,6 +25,11 @@
 <hr>
 <input id="address-input" type="text" value="San Antonio, Texas">
 <button id="map-search">Search</button>
+<div>
+    <button class="zoom-btn" value="10">10</button>
+    <button class="zoom-btn" value="15">15</button>
+    <button class="zoom-btn" value="20">20</button>
+</div>
 
 <!-- Mapbox JS -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
@@ -37,30 +42,64 @@
     mapboxgl.accessToken = MAPBOX_API_KEY;
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v9',
-        zoom: 10,
+        style: 'mapbox://styles/mapbox/navigation-night-v1',
+        zoom: 5,
         //coords are for codeup
         center: [-98.72984742024533, 29.43094268749772]
     });
+    let restraunts = [
+        {
+            address: "<p> 9330 Wurzbach Rd, San Antonio, TX 78240</p>",
+            name: "<p>Jack in the Box</p>",
+            description: "<p>Yummy Mexican Food!</p>",
+            zoom: 24
+        },
+        {
+            address: "<p>12808 Frontage Rd, San Antonio, TX 78249</p>",
+            name: "<p>Whataburger</p>",
+            description: "<p>Yummy Mexican Food!</p>",
+            zoom: 24
+        },
+        {
+            address: "<p>25200 I-10 Lot 2, San Antonio, TX 78257</p>",
+            name: "<p>McDonalds</p>",
+            description: "<p>Yummy Mexican Food!</p>",
+            zoom: 24
+        }
+    ]
     var miHaciendaInfo = {
-        address: "12024 FM1957, San Antonio, TX 78253",
-        popupHTML: "<p>Yummy Mexican Food!</p>"
+        address: "<p>12024 FM1957, San Antonio, TX 78253</p>",
+        name: "<p>Mi Hacienda</p>",
+        description: "<p>Yummy Mexican Food!</p>",
+        zoom: 24
     };
 
     function placeMarkerAndPopup(info, token, map) {
         geocode(info.address, token).then(function(coordinates) {
             var popup = new mapboxgl.Popup()
-                .setHTML(info.popupHTML);
-            var marker = new mapboxgl.Marker()
+                .setHTML(`Restaurant name: ${info.name} Description: ${info.description} Address: ${info.address} Coordinates: ${coordinates} `);
+            let marker = new mapboxgl.Marker()
                 .setLngLat(coordinates)
                 .addTo(map)
                 .setPopup(popup);
-            popup.addTo(map);
+
+
         });
     }
 
     placeMarkerAndPopup(miHaciendaInfo, MAPBOX_API_KEY, map);
+    restraunts.forEach(function (restaurant) {
+        placeMarkerAndPopup(restaurant, MAPBOX_API_KEY, map)
+    })
 
+    const zoomBtn = document.getElementsByClassName("zoom-btn");
+    for (let i = 0; i < zoomBtn.length; i++) {
+        zoomBtn[i].addEventListener("click", changeZoom)
+    }
+    function changeZoom () {
+        let zoomValue = this.value
+        map.setZoom(zoomValue)
+    }
 
 
 </script>
