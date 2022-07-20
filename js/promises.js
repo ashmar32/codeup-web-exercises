@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const options = {
             method: 'GET',
             headers: {
-                "Authorization": "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"
+                "Authorization": `token ${GIT_HUB_API_KEY}`
             }
         }
         function getLastCommit(username) {
