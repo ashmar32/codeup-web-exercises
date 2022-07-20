@@ -3,7 +3,7 @@
 .DS_Store
 js/keys.js
 
-private_constants.js
+jalopy-main/js/private_constants.js
 config.js
 keys.js
 application.properties
