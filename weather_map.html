@@ -19,7 +19,7 @@
 </nav>
 <hr>
 <div class="container text-center">
-<div class="row">
+<div class="row" id="forecast-container">
     <div class="col">
         <div class="card" >
             <div class="card-body">
@@ -116,24 +116,74 @@
             mapboxgl: mapboxgl
         })
     );
-
+// "http://api.openweathermap.org/data/2.5/onecall?APPID=OPEN_WEATHER_APPID&lat=29.423017&lon=-98.48527&units=imperial"
 let queryParams = new URLSearchParams({
     APPID: OPEN_WEATHER_APPID,
     lat:    29.423017,
     lon:   -98.48527,
     units: "imperial"
 });
+
+
+
+let forecastContainer = document.querySelector("#forecast-container")
 // concat the query parameters onto the URL
-fetch("http://api.openweathermap.org/data/2.5/onecall?" + queryParams, {
-        method: "GET"
+getWeatherData(queryParams)
+    function getWeatherData(queryObject) {
+        fetch("http://api.openweathermap.org/data/2.5/onecall?" + queryObject, {
+                method: "GET"
+            }
+        ).then(async function(response) {
+            // use await to wait for the json data and then do something with it
+            const data = await response.json();
+            console.log('The entire response:', data);
+            console.log('Diving in - here is current information: ', data.current);
+            console.log('A step further - information for tomorrow: ', data.daily[1]);
+            forecastContainer.innerHTML = ""
+            for (let i = 0; i < 5; i++) {
+                console.log(data.daily[i])
+                let date = new Date(data.daily[i].dt * 1000)
+                console.log(date)
+                forecastContainer.innerHTML = forecastContainer.innerHTML + `
+        <div class="col">
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title">${date.toDateString()}</h5>
+                <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}.png"></img>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Description: ${data.daily[i].weather[0].description} </li>
+                <li class="list-group-item">Day Temp: ${data.daily[i].temp.day}</li>
+                <li class="list-group-item">Night Temp: ${data.daily[i].temp.night}</li>
+            </ul>
+        </div>
+    </div>
+        `
+            }
+        });
     }
-).then(async function(response) {
-    // use await to wait for the json data and then do something with it
-    const data = await response.json();
-    console.log('The entire response:', data);
-    console.log('Diving in - here is current information: ', data.current);
-    console.log('A step further - information for tomorrow: ', data.daily[1]);
-});
+
+
+// let dropPin = document.querySelector("#map")
+//     dropPin.addEventListener("click", event => {
+//         console.log(event)
+//     })
+    map.on("click", function (result) {
+        let marker = new mapboxgl.Marker()
+            .setLngLat([result.lngLat.lng, result.lngLat.lat])
+            .addTo(map)
+        console.log(result)
+
+        let resultObject = new URLSearchParams({
+            APPID: OPEN_WEATHER_APPID,
+            lat:    result.lngLat.lat,
+            lon:   result.lngLat.lng,
+            units: "imperial"
+        });
+
+        getWeatherData(resultObject)
+    })
+
 </script>
 
 
