@@ -1,6 +1,6 @@
 import {showNotification} from "../messaging.js";
 
-export default function aboutView(props) {
+export default function aboutHTMLFunction(props) {
     // language=HTML
     return `
         <header>
@@ -43,7 +43,7 @@ export default function aboutView(props) {
 function changeAboutText() {
     document.querySelector("#about-text").innerText = "Hello World!";
 }
-export function AboutEvents() {
+export function aboutJSFunction() {
     // showNotification("Hey, a message!", "danger");
     document.querySelector("#change-about-text").addEventListener("click", changeAboutText);
 }
