@@ -43,8 +43,10 @@ const quotes = [
 
 export default function quotesView(props) {
     let html = `
-<h1>quotes</h1>
-<div id="my-quotes"></div>
+<div class="card" id="my-quotes">
+    <div class="card-header">
+    Inspirational Pokemon Quotes
+    </div><div class="card-body">
 `
     for (let i = 0; i < quotes.length; i++) {
         html+= `

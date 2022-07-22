@@ -10,8 +10,15 @@ h1 {
     margin-right: auto;
 }
 .blockquote-footer {
-    color: crimson;
+    color: #CC0000;
 }
-{
-    color: green;
+.card-header {
+    font-family:;
+    text-align: center;
+    background-color: #FF0000;
+    color: #FFDE00;
+}
+.card-body {
+    background-color: #3B4CCA;
+    color: #B3A125;
 }
