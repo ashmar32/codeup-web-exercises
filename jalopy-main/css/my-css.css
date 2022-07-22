@@ -9,3 +9,9 @@ h1 {
     margin-left: auto;
     margin-right: auto;
 }
+.blockquote-footer {
+    color: crimson;
+}
+{
+    color: green;
+}
