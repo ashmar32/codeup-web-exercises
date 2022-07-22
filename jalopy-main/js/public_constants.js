@@ -4,3 +4,4 @@ const FRONTEND_VERSION = 0.0004;
 const APP_TITLE = "Jalopy Starter";
 const SKIP_STALE_TOKEN_CHECK = true;
 const INTELLIJ_PROJECT_PATH = 'jalopy-main/';
+const DOG_QUOTE_API_KEY = 'venus-123';

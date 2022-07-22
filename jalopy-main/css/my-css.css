@@ -13,12 +13,16 @@ h1 {
     color: #CC0000;
 }
 .card-header {
-    font-family:;
     text-align: center;
     background-color: #FF0000;
     color: #FFDE00;
 }
 .card-body {
-    background-color: #3B4CCA;
-    color: #B3A125;
+    color: #FFDE00;
+    /*background-image: url("/jalopy-main/assets/giphy.gif");*/
+}
+div > #my-quotes {
+    /*background-color: #3B4CCA;*/
+    font-family: Ketchum;
+    font-size: 4em;
 }

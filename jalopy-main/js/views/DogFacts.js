@@ -1,4 +1,5 @@
 export default function DogFactsView(props) {
+    console.log(props)
     return `
 <div class="container">
     <h1>Dog Facts</h1>

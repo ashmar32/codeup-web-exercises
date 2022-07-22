@@ -73,14 +73,30 @@ export default function router(URI) {
         },
         '/dogs': {
             returnView: dogFactsView,
-            state: {},
+            state: {
+                dogFacts: {
+                    url: "https://dogfacts.fulgentcorp.com:12250/v1/facts?random=true&limit=10",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': DOG_QUOTE_API_KEY
+                    }
+                }
+            },
             uri: '/dogs',
             title: 'Dog Facts',
             viewEvent: dogFactsEvents
         },
         '/quotes': {
             returnView: quotesView,
-            state: {},
+            state: {
+                quotes: {
+                    url: "https://quotes.fulgentcorp.com:12250/v1/quotes?random=false&limit=2",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': DOG_QUOTE_API_KEY
+                    }
+                }
+            },
             uri: '/quotes',
             title: 'Quotes',
             viewEvent: quotesEvents
