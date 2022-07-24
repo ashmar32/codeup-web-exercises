@@ -20,71 +20,7 @@
 <hr>
 <div class="container text-center">
 <div class="row" id="forecast-container">
-    <div class="col">
-        <div class="card" >
-            <div class="card-body">
-                <h5 class="card-title">Day 1</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-            </ul>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card" >
-            <div class="card-body">
-                <h5 class="card-title">Day 2</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-            </ul>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card" >
-            <div class="card-body">
-                <h5 class="card-title">Day 3</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-            </ul>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card" >
-            <div class="card-body">
-                <h5 class="card-title">Day 4</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-            </ul>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card" >
-            <div class="card-body">
-                <h5 class="card-title">Day 5</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-            </ul>
-        </div>
-    </div>
+
 </div>
 <hr>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
@@ -125,12 +61,11 @@ let queryParams = new URLSearchParams({
 });
 
 
-
 let forecastContainer = document.querySelector("#forecast-container")
 // concat the query parameters onto the URL
 getWeatherData(queryParams)
-    function getWeatherData(queryObject) {
-        fetch("http://api.openweathermap.org/data/2.5/onecall?" + queryObject, {
+    function getWeatherData(searchParams) {
+        fetch("http://api.openweathermap.org/data/2.5/onecall?" + searchParams, {
                 method: "GET"
             }
         ).then(async function(response) {
@@ -140,26 +75,8 @@ getWeatherData(queryParams)
             console.log('Diving in - here is current information: ', data.current);
             console.log('A step further - information for tomorrow: ', data.daily[1]);
             forecastContainer.innerHTML = ""
-            for (let i = 0; i < 5; i++) {
-                console.log(data.daily[i])
-                let date = new Date(data.daily[i].dt * 1000)
-                console.log(date)
-                forecastContainer.innerHTML = forecastContainer.innerHTML + `
-        <div class="col">
-        <div class="card" >
-            <div class="card-body">
-                <h5 class="card-title">${date.toDateString()}</h5>
-                <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}.png"></img>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Description: ${data.daily[i].weather[0].description} </li>
-                <li class="list-group-item">Day Temp: ${data.daily[i].temp.day}</li>
-                <li class="list-group-item">Night Temp: ${data.daily[i].temp.night}</li>
-            </ul>
-        </div>
-    </div>
-        `
-            }
+            addWeeklyCards(data)
+
         });
     }
 
@@ -183,6 +100,31 @@ getWeatherData(queryParams)
 
         getWeatherData(resultObject)
     })
+
+    function addWeeklyCards(data) {
+        for (let i = 0; i < 5; i++) {
+            console.log(data.daily[i])
+            let date = new Date(data.daily[i].dt * 1000)
+            console.log(date)
+            forecastContainer.innerHTML = forecastContainer.innerHTML + `
+        <div class="col">
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title">${date.toDateString()}</h5>
+                <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}.png"></img>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Description: ${data.daily[i].weather[0].description} </li>
+                <li class="list-group-item">Day Temp: ${data.daily[i].temp.day}</li>
+                <li class="list-group-item">Night Temp: ${data.daily[i].temp.night}</li>
+            </ul>
+        </div>
+    </div>
+        `
+        }
+    }
+
+
 
 </script>
 
