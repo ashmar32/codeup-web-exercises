@@ -38,6 +38,8 @@
 <script src="js/mapbox-geocoder-utils.js"></script>
 <script src="js/keys.js"></script>
 <script>
+    let marksArray= [];
+
     mapboxgl.accessToken = MAPBOX_API_KEY;
     var map = new mapboxgl.Map({
         container: 'map',
@@ -46,11 +48,13 @@
         //coords are for codeup
         center: [-98.72984742024533, 29.43094268749772]
     });
+    const mapBoxGeocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+        marker: false
+    })
     map.addControl(
-        new MapboxGeocoder({
-            accessToken: MAPBOX_API_KEY,
-            mapboxgl: mapboxgl
-        })
+        mapBoxGeocoder
     );
 // "http://api.openweathermap.org/data/2.5/onecall?APPID=OPEN_WEATHER_APPID&lat=29.423017&lon=-98.48527&units=imperial"
 let queryParams = new URLSearchParams({
@@ -85,10 +89,30 @@ getWeatherData(queryParams)
 //     dropPin.addEventListener("click", event => {
 //         console.log(event)
 //     })
+    mapBoxGeocoder.on('result', function (results) {
+        console.log(results)
+        let searchBoxParams = new URLSearchParams({
+            APPID: OPEN_WEATHER_APPID,
+            lat:    results.result.geometry.coordinates[1],
+            lon:   results.result.geometry.coordinates[0],
+            units: "imperial"
+
+        });
+
+        let marker = new mapboxgl.Marker()
+            .setLngLat([results.result.geometry.coordinates[0],results.result.geometry.coordinates[1]])
+            .addTo(map)
+        resetMarkers()
+        marksArray.push(marker)
+        console.log(marksArray)
+        getWeatherData(searchBoxParams)
+    })
     map.on("click", function (result) {
         let marker = new mapboxgl.Marker()
             .setLngLat([result.lngLat.lng, result.lngLat.lat])
             .addTo(map)
+        resetMarkers()
+        marksArray.push(marker)
         console.log(result)
 
         let resultObject = new URLSearchParams({
@@ -123,7 +147,11 @@ getWeatherData(queryParams)
         `
         }
     }
-
+    function resetMarkers () {
+        for (let i = 0; i < marksArray.length; i++) {
+            marksArray[i].remove()
+        }
+    }
 
 
 </script>
