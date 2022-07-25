@@ -18,11 +18,10 @@ h1 {
     color: #FFDE00;
 }
 .card-body {
-    color: #FFDE00;
-    /*background-image: url("/jalopy-main/assets/giphy.gif");*/
+    color: black;
 }
-div > #my-quotes {
-    /*background-color: #3B4CCA;*/
-    font-family: Ketchum;
-    font-size: 4em;
-}
+/*div > #my-quotes {*/
+/*    !*background-color: #3B4CCA;*!*/
+/*    font-family: Ketchum;*/
+/*    font-size: 4em;*/
+/*}*/

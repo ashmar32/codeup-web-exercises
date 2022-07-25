@@ -8,8 +8,8 @@ import Register from "./views/Register.js"
 import {RegisterEvent} from "./views/Register.js";
 import UserIndex, {UserEvents} from "./views/User.js";
 import Logout, {LogoutEvents} from "./views/Logout.js";
-import dogFactsView, {dogFactsEvents} from "./views/DogFacts.js";
-import quotesView, {quotesEvents} from "./views/Quotes.js";
+import dogFactsView, {DogFactsEvents} from "./views/DogFacts.js";
+import quotesHTMLFunction, {quotesJSFunction} from "./views/Quotes.js";
 /**
  * Returns the route object for a specific route based on the given URI
  * @param URI
@@ -84,13 +84,13 @@ export default function router(URI) {
             },
             uri: '/dogs',
             title: 'Dog Facts',
-            viewEvent: dogFactsEvents
+            viewEvent: DogFactsEvents
         },
         '/quotes': {
-            returnView: quotesView,
+            returnView: quotesHTMLFunction,
             state: {
                 quotes: {
-                    url: "https://quotes.fulgentcorp.com:12250/v1/quotes?random=false&limit=2",
+                    url: "https://quotes.fulgentcorp.com:12250/v1/quotes?random=true&limit=10",
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': DOG_QUOTE_API_KEY
@@ -99,7 +99,7 @@ export default function router(URI) {
             },
             uri: '/quotes',
             title: 'Quotes',
-            viewEvent: quotesEvents
+            viewEvent: quotesJSFunction
         },
     };
 
