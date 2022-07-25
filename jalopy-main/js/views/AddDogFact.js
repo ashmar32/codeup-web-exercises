@@ -1,9 +1,8 @@
-import createView from "../createView.js"
+// import createView from "../createView.js"
 
 export default function InsertDogFactView(props) {
     return `
         <form class="container">
-            <h1>New Dog Fact</h1>
             <h1>New Dog Fact</h1>
             <form>
                 <label for="dogFactText" class="form-label">Dog fact</label>
@@ -37,7 +36,7 @@ function addDogQuote() {
         },
         body: JSON.stringify([fact])
     }
-    fetch("https://dogfacts.fulgentcorp.com:12250/v1/factsAAA", requestOptions)
+    fetch("https://dogfacts.fulgentcorp.com:12250/v1/facts", requestOptions)
         .then(function(response) {
             if(!response.ok) {
                 console.log("add dog fact error: " + response.status);

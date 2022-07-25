@@ -11,6 +11,7 @@ import Logout, {LogoutEvents} from "./views/Logout.js";
 import dogFactsView, {DogFactsEvents} from "./views/DogFacts.js";
 import quotesHTMLFunction, {quotesJSFunction} from "./views/Quotes.js";
 import InsertDogView, {InsertDogFactEvents} from "./views/AddDogFact.js";
+import InsertNewQuoteView, {InsertNewQuoteEvents} from "./views/AddQuote.js";
 /**
  * Returns the route object for a specific route based on the given URI
  * @param URI
@@ -91,7 +92,7 @@ export default function router(URI) {
             returnView: quotesHTMLFunction,
             state: {
                 quotes: {
-                    url: "https://quotes.fulgentcorp.com:12250/v1/quotes?random=true&limit=5",
+                    url: "https://quotes.fulgentcorp.com:12250/v1/quotes?random=true&limit=10",
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': DOG_QUOTE_API_KEY
@@ -109,6 +110,13 @@ export default function router(URI) {
             title: 'Insert Dog Fact',
             viewEvent: InsertDogFactEvents
         },
+        '/insert-quote': {
+            returnView: InsertNewQuoteView,
+            state: {},
+            uri: '/insert-quote',
+            title: 'Insert New Quote',
+            viewEvent: InsertNewQuoteEvents
+        }
     };
 
     // if we see a URI with index.html then interpret that as a route for /

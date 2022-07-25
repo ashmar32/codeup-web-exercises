@@ -1,3 +1,4 @@
+import InsertNewQuoteView from "../AddQuote.js";
 // const quotes = [
 //     {
 //         quote: "I see now that one’s birth is irrelevant. It’s what you do that determines who you are.”",
@@ -45,6 +46,7 @@ export default function quotesHTMLFunction(props) {
    console.log(props.quotes)
 
     let html = buildTopHTML();
+    html += InsertNewQuoteView();
     html += addQuotes(props);
     html += buildBottomHTML();
 
