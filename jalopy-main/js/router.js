@@ -11,7 +11,7 @@ import Logout, {LogoutEvents} from "./views/Logout.js";
 import dogFactsView, {DogFactsEvents} from "./views/DogFacts.js";
 import quotesHTMLFunction, {quotesJSFunction} from "./views/Quotes.js";
 import InsertDogView, {InsertDogFactEvents} from "./views/AddDogFact.js";
-import InsertNewQuoteView, {InsertNewQuoteEvents} from "./views/AddQuote.js";
+import InsertNewQuoteView, {InsertNewQuoteEvents} from "./AddQuote.js";
 /**
  * Returns the route object for a specific route based on the given URI
  * @param URI
